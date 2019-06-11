@@ -8,18 +8,18 @@ const NavBar = () => {
   return (
     <ProductConsumer>
       {value => {
-        const { cartTotal } = value;
+        const { cartTotal, toggleSideBar, toggleSideCart } = value;
         return (
           <NavWrapper>
             <div className="nav-center">
-              <FaBars className="navbar-icon" />
+              <FaBars className="navbar-icon" onClick={toggleSideBar} />
               <img
                 src={logo}
                 alt="company logo"
                 style={{ width: "70px", height: "70px" }}
               />
               <div className="nav-cart">
-                <FaCartPlus className="navbar-icon" />
+                <FaCartPlus className="navbar-icon" onClick={toggleSideCart} />
                 <div className="cart-items">{cartTotal}</div>
               </div>
             </div>
@@ -42,7 +42,7 @@ const NavWrapper = styled.nav`
   border-bottom: 3px solid var(--mainPink);
   z-index: 1;
   .nav-center {
-    max-width: 1800px;
+    max-width: 2000px;
     display: flex;
     align-items: center;
     justify-content: space-around;

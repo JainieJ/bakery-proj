@@ -9,11 +9,15 @@ import SingleProductPage from "./pages/SingleProductPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 import NavBar from "./components/NavBar";
+import SideBar from "./components/SideBar";
+import SideCart from "./components/SideCart";
 
 function App() {
   return (
     <>
       <NavBar />
+      <SideBar />
+      <SideCart />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/about" component={AboutPage} />
