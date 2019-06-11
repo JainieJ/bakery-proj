@@ -8,11 +8,12 @@ import ProductsPage from "./pages/ProductsPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <>
-      {/* navbar here */}
+      <NavBar />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/about" component={AboutPage} />

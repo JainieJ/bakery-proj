@@ -3,10 +3,12 @@ import React, { Component } from "react";
 const Product = React.createContext();
 
 class ProductProvider extends Component {
-  state = {};
+  state = {
+    cartTotal: 0
+  };
   render() {
     return (
-      <Product.Provider value={"hello from context"}>
+      <Product.Provider value={{ ...this.state }}>
         {this.props.children}
       </Product.Provider>
     );
