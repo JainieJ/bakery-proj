@@ -2,9 +2,23 @@
   --mainWhite: #ffffff;
   --mainPink: #fa97a7;
   --mainBlack: #000000;
-  --mainYellow: #f9e494;
+  --mainYellow: rgb(249, 228, 148);
   --mainViolet: #8e7b75;
   --mainTransition: all 0.3s ease-in-out;
+}
+
+.main-link {
+  border: 3px solid var(--mainBlack);
+  padding: 1rem;
+  border-radius: 0.3rem;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  color: var(--mainBlack);
+}
+.main-link:hover {
+  background: var(--mainBlack);
+  color: var(--mainPink);
+  text-decoration: none;
 }
 
 body {
