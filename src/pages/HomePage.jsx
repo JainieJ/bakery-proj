@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import HomeBanner from "../img/bg-banner.jpg";
+import Services from "./../components/HomePage/Services";
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
           our products
         </Link>
       </Hero>
+      <Services />
     </>
   );
 };
