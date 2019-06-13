@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { links } from "./LinkData";
 import { socialLinks } from "./socialLinks";
 import { contactInfo } from "./contactInfo";
+import { items } from "./productData";
 
 const Product = React.createContext();
 
@@ -12,7 +13,26 @@ class ProductProvider extends Component {
     sideBarOpen: false,
     links,
     socialLinks,
-    contactInfo
+    contactInfo,
+    items: [],
+    filteredItems: []
+  };
+  componentDidMount() {
+    //ajax request here
+    this.setProducts(items);
+  }
+  setProducts = products => {
+    //formating data for easy reading
+    const formatedData = products.map(product => {
+      return {
+        id: product.sys.id,
+        ...product.fields,
+        image: product.fields.image.fields.file.url
+      };
+    });
+    this.setState({ items: formatedData, filteredItems: formatedData }, () =>
+      console.log(this.state.filteredItems)
+    );
   };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });

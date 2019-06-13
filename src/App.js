@@ -24,8 +24,8 @@ function App() {
         <Route path="/about" component={AboutPage} />
         <Route path="/products" exact component={ProductsPage} />
         <Route path="/products/:id" component={SingleProductPage} />
-        <Route path="/contact" component={ContactPage} />
-        <Route path="/cart" component={CartPage} />
+        <Route path="/contact" exact component={ContactPage} />
+        <Route path="/cart" exact component={CartPage} />
         <Route component={DefaultPage} />
       </Switch>
       <Footer />

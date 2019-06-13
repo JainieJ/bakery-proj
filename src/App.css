@@ -21,6 +21,9 @@
   color: var(--mainPink);
   text-decoration: none;
 }
+.grey-bcg {
+  background: #c9c0b7;
+}
 
 body {
   font-family: "Kaushan Script", cursive !important;
