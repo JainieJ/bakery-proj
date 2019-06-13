@@ -11,6 +11,7 @@ import CartPage from "./pages/CartPage";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import SideCart from "./components/SideCart";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cart" component={CartPage} />
         <Route component={DefaultPage} />
       </Switch>
+      <Footer />
     </>
   );
 }

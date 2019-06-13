@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { links } from "./LinkData";
+import { socialLinks } from "./socialLinks";
+import { contactInfo } from "./contactInfo";
 
 const Product = React.createContext();
 
@@ -8,7 +10,9 @@ class ProductProvider extends Component {
     cartTotal: 0,
     sideCartOPen: false,
     sideBarOpen: false,
-    links
+    links,
+    socialLinks,
+    contactInfo
   };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
