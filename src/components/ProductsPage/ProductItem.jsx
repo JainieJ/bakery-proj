@@ -8,7 +8,7 @@ const ProductItem = ({ item: { image, price, title, id } }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { handleSingleProduct } = value;
+        const { setSingleProduct, addToCart } = value;
         return (
           <ItemWrapper className="col-10 mx-auto my-3 col-sm-6 col-lg-4">
             <div className="card">
@@ -22,10 +22,13 @@ const ProductItem = ({ item: { image, price, title, id } }) => {
                   <Link to={`/products/${id}`}>
                     <FaSearch
                       className="icon"
-                      onClick={() => handleSingleProduct(id)}
+                      onClick={() => setSingleProduct(id)}
                     />
                   </Link>
-                  <FaShoppingCart className="icon" />
+                  <FaShoppingCart
+                    className="icon"
+                    onClick={() => addToCart(id)}
+                  />
                 </div>
               </div>
               <div className="card-body d-flex justify-content-between">

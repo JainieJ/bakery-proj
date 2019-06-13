@@ -35,11 +35,16 @@ class ProductProvider extends Component {
       console.log(this.state.filteredItems)
     );
   };
-  handleSingleProduct = id => {
-    const { items } = this.state;
-    const product = items.find(item => item.id === id);
-    this.setState({ singleProduct: product });
+  setSingleProduct = id => {
+    let product = this.state.items.find(item => item.id === id);
+    localStorage.setItem("singleProduct", JSON.stringify(product));
+    this.setState({ singleProduct: { ...product } });
+    //get singleprod from storage in componentDidMount
   };
+  addToCart = id => {
+    console.log(id);
+  };
+
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
@@ -61,7 +66,8 @@ class ProductProvider extends Component {
           toggleSideCart: this.toggleSideCart,
           closeSideBar: this.closeSideBar,
           closeSideCart: this.closeSideCart,
-          handleSingleProduct: this.handleSingleProduct
+          setSingleProduct: this.setSingleProduct,
+          addToCart: this.addToCart
         }}
       >
         {this.props.children}

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { ProductConsumer } from "../../context/context";
 import { Link } from "react-router-dom";
 
-const SingleProductContent = () => {
+const SingleProductContent = ({ id }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { singleProduct } = value;
+        const { singleProduct, addToCart } = value;
         return (
           <SingleProductWrapper className="container py-5">
             <div className="row">
@@ -26,10 +26,20 @@ const SingleProductContent = () => {
                   price: ${singleProduct.price}
                 </h4>
                 <p className="my-3 text-muted">{singleProduct.description}</p>
-                <button className="main-link cart-btn">add to cart</button>
-                <Link to="/products" className="main-link products-btn">
-                  Products
-                </Link>
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="main-link cart-btn d-flex align-items-center"
+                    onClick={() => addToCart(singleProduct.id)}
+                  >
+                    add to cart
+                  </button>
+                  <Link
+                    to="/products"
+                    className="main-link products-btn d-flex align-items-center"
+                  >
+                    Products
+                  </Link>
+                </div>
               </div>
             </div>
           </SingleProductWrapper>
@@ -54,6 +64,8 @@ const SingleProductWrapper = styled.div`
   }
   p {
     font-size: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 3rem !important;
   }
   .product-img {
     border: 8px solid var(--mainYellow);
