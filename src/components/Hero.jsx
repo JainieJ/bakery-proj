@@ -25,7 +25,7 @@ const HeroWrapper = styled.div`
         rgba(249, 228, 148, 0.4)
       ),
       url(${props => props.img}) center/cover no-repeat fixed;
-    min-height: ${props => (props.height ? "90vh" : "60vh")};
+    min-height: ${props => (props.height ? "90vh" : "50vh")};
   }
   .banner-text {
     color: var(--mainWhite);
