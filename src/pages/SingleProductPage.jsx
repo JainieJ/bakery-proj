@@ -1,7 +1,15 @@
 import React from "react";
+import singleProductBcg from "../img/singleProductBcg.jpg";
+import Hero from "./../components/Hero";
+import SingleProductContent from "./../components/SingleProductPage/SingleProductContent";
 
 const SingleProductPage = () => {
-  return <h1>hello from SingleProductPage</h1>;
+  return (
+    <>
+      <Hero img={singleProductBcg} />
+      <SingleProductContent />
+    </>
+  );
 };
 
 export default SingleProductPage;
