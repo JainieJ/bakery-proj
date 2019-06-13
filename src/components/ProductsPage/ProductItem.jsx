@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { ProductConsumer } from "../../context/context";
 
-const ProductItem = ({ item: { image, price, title } }) => {
+const ProductItem = ({ item: { image, price, title, id } }) => {
   return (
     <ProductConsumer>
       {value => {
+        const { handleSingleProduct } = value;
         return (
           <ItemWrapper className="col-10 mx-auto my-3 col-sm-6 col-lg-4">
             <div className="card">
@@ -17,7 +19,12 @@ const ProductItem = ({ item: { image, price, title } }) => {
                   className="card-img-top product-img"
                 />
                 <div className="icon-container">
-                  <FaSearch className="icon" />
+                  <Link to={`/products/${id}`}>
+                    <FaSearch
+                      className="icon"
+                      onClick={() => handleSingleProduct(id)}
+                    />
+                  </Link>
                   <FaShoppingCart className="icon" />
                 </div>
               </div>

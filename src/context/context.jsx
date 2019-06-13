@@ -15,7 +15,8 @@ class ProductProvider extends Component {
     socialLinks,
     contactInfo,
     items: [],
-    filteredItems: []
+    filteredItems: [],
+    singleProduct: {}
   };
   componentDidMount() {
     //ajax request here
@@ -33,6 +34,11 @@ class ProductProvider extends Component {
     this.setState({ items: formatedData, filteredItems: formatedData }, () =>
       console.log(this.state.filteredItems)
     );
+  };
+  handleSingleProduct = id => {
+    const { items } = this.state;
+    const product = items.find(item => item.id === id);
+    this.setState({ singleProduct: product });
   };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
@@ -54,7 +60,8 @@ class ProductProvider extends Component {
           toggleSideBar: this.toggleSideBar,
           toggleSideCart: this.toggleSideCart,
           closeSideBar: this.closeSideBar,
-          closeSideCart: this.closeSideCart
+          closeSideCart: this.closeSideCart,
+          handleSingleProduct: this.handleSingleProduct
         }}
       >
         {this.props.children}
