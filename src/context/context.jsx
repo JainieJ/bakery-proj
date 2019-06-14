@@ -8,7 +8,7 @@ const Product = React.createContext();
 
 class ProductProvider extends Component {
   state = {
-    sideCartOPen: false,
+    sideCartOPen: true,
     sideBarOpen: false,
     links,
     socialLinks,
