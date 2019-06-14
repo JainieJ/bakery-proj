@@ -39,9 +39,12 @@ class ProductProvider extends Component {
       {
         items: formatedData,
         filteredItems: formatedData,
-        singleProduct: this.getSingleProduct()
+        singleProduct: this.getSingleProduct(),
+        cartProducts: this.getCartProducts()
       },
-      () => console.log(this.state.filteredItems)
+      () => {
+        this.performCalculations();
+      }
     );
   };
   setSingleProduct = id => {
@@ -54,6 +57,14 @@ class ProductProvider extends Component {
     return localStorage.getItem("singleProduct")
       ? JSON.parse(localStorage.getItem("singleProduct"))
       : {};
+  };
+  setCartProducts = () => {
+    localStorage.setItem("cart", JSON.stringify(this.state.cartProducts));
+  };
+  getCartProducts = () => {
+    return localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
   };
   addToCart = id => {
     const { cartProducts } = this.state;
@@ -69,7 +80,7 @@ class ProductProvider extends Component {
     }
     this.setState({ cartProducts: updatedCartProducts }, () => {
       this.performCalculations();
-      //save in local storage?
+      this.setCartProducts();
       this.openSideCart();
     });
   };
