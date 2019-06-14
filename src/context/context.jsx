@@ -8,7 +8,6 @@ const Product = React.createContext();
 
 class ProductProvider extends Component {
   state = {
-    cartTotal: 0,
     sideCartOPen: false,
     sideBarOpen: false,
     links,
@@ -16,7 +15,12 @@ class ProductProvider extends Component {
     contactInfo,
     items: [],
     filteredItems: [],
-    singleProduct: {}
+    singleProduct: {},
+    cartProducts: [],
+    totalCartItems: 0,
+    cartSubTotal: 0,
+    cartTax: 0,
+    cartTotal: 0
   };
   componentDidMount() {
     //ajax request here
@@ -31,8 +35,13 @@ class ProductProvider extends Component {
         image: product.fields.image.fields.file.url
       };
     });
-    this.setState({ items: formatedData, filteredItems: formatedData }, () =>
-      console.log(this.state.filteredItems)
+    this.setState(
+      {
+        items: formatedData,
+        filteredItems: formatedData,
+        singleProduct: this.getSingleProduct()
+      },
+      () => console.log(this.state.filteredItems)
     );
   };
   setSingleProduct = id => {
@@ -41,8 +50,54 @@ class ProductProvider extends Component {
     this.setState({ singleProduct: { ...product } });
     //get singleprod from storage in componentDidMount
   };
+  getSingleProduct = () => {
+    return localStorage.getItem("singleProduct")
+      ? JSON.parse(localStorage.getItem("singleProduct"))
+      : {};
+  };
   addToCart = id => {
-    console.log(id);
+    const { cartProducts } = this.state;
+    let updatedCartProducts = [...cartProducts];
+    let product = this.state.items.find(item => item.id === id);
+    if (updatedCartProducts.includes(product)) {
+      product.amount++;
+      product.total = parseFloat((product.price * product.amount).toFixed(2));
+    } else {
+      product.amount = 1;
+      product.total = product.price;
+      updatedCartProducts.push(product);
+    }
+    this.setState({ cartProducts: updatedCartProducts }, () => {
+      this.performCalculations();
+      //save in local storage?
+      this.openSideCart();
+    });
+  };
+  performCalculations = () => {
+    const { cartProducts } = this.state;
+    // total items in cart
+    const totalAmount = cartProducts.reduce((acc, curr) => {
+      acc += curr.amount;
+      return acc;
+    }, 0);
+    //total excluding taxes
+    let cartSubTotal = cartProducts.reduce((acc, curr) => {
+      acc += curr.total;
+      return acc;
+    }, 0);
+    cartSubTotal = parseFloat(cartSubTotal.toFixed(2));
+    //taxes
+    const cartTax = parseFloat((cartSubTotal * 0.2).toFixed(2));
+    //total including taxes
+    let cartTotal = cartSubTotal + cartTax;
+    cartTotal = parseFloat(cartTotal.toFixed(2));
+    //state update
+    this.setState({
+      totalCartItems: totalAmount,
+      cartSubTotal,
+      cartTax,
+      cartTotal
+    });
   };
 
   toggleSideBar = () => {
@@ -56,6 +111,9 @@ class ProductProvider extends Component {
   };
   closeSideCart = () => {
     this.setState({ sideCartOPen: false });
+  };
+  openSideCart = () => {
+    this.setState({ sideCartOPen: true });
   };
   render() {
     return (

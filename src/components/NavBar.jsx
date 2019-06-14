@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <ProductConsumer>
       {value => {
-        const { cartTotal, toggleSideBar, toggleSideCart } = value;
+        const { totalCartItems, toggleSideBar, toggleSideCart } = value;
         return (
           <NavWrapper>
             <div className="nav-center">
@@ -20,7 +20,7 @@ const NavBar = () => {
               />
               <div className="nav-cart">
                 <FaCartPlus className="navbar-icon" onClick={toggleSideCart} />
-                <div className="cart-items">{cartTotal}</div>
+                <div className="cart-items">{totalCartItems}</div>
               </div>
             </div>
           </NavWrapper>
