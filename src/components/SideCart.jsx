@@ -7,7 +7,7 @@ const SideCart = () => {
   return (
     <ProductConsumer>
       {value => {
-        const { sideCartOPen, cartProducts, cartTotal } = value;
+        const { sideCartOPen, closeSideCart, cartProducts, cartTotal } = value;
         return (
           <SideCartWrapper open={sideCartOPen}>
             <div className="column">
@@ -25,7 +25,7 @@ const SideCart = () => {
                 );
               })}
               <h5 className="cart-total">cart total: ${cartTotal}</h5>
-              <Link to="/cart" className="main-link">
+              <Link to="/cart" className="main-link" onClick={closeSideCart}>
                 cart page
               </Link>
             </div>

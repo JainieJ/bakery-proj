@@ -8,7 +8,7 @@ const Product = React.createContext();
 
 class ProductProvider extends Component {
   state = {
-    sideCartOPen: true,
+    sideCartOPen: false,
     sideBarOpen: false,
     links,
     socialLinks,
@@ -70,13 +70,17 @@ class ProductProvider extends Component {
     const { cartProducts } = this.state;
     let updatedCartProducts = [...cartProducts];
     let product = this.state.items.find(item => item.id === id);
-    if (updatedCartProducts.includes(product)) {
-      product.amount++;
-      product.total = parseFloat((product.price * product.amount).toFixed(2));
+    let productInCart = updatedCartProducts.find(
+      item => item.id === product.id
+    );
+    if (productInCart) {
+      productInCart.amount++;
+      productInCart.total = parseFloat(
+        (productInCart.price * productInCart.amount).toFixed(2)
+      );
     } else {
-      product.amount = 1;
-      product.total = product.price;
-      updatedCartProducts.push(product);
+      productInCart = { ...product, amount: 1, total: product.price };
+      updatedCartProducts.push(productInCart);
     }
     this.setState({ cartProducts: updatedCartProducts }, () => {
       this.performCalculations();
