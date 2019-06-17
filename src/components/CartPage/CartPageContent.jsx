@@ -1,6 +1,7 @@
 import React from "react";
 import Title from "../Title";
 import CartColumns from "./CartColumns";
+import CartList from "./CartList";
 
 const CartPageContent = () => {
   return (
@@ -13,6 +14,7 @@ const CartPageContent = () => {
         </div>
       </div>
       <CartColumns />
+      <CartList />
     </>
   );
 };
