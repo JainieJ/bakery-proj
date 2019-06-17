@@ -23,7 +23,9 @@ class ProductProvider extends Component {
     cartTotal: 0,
     search: "",
     type: "all",
-    price: 0,
+    price: "",
+    maxPrice: 0,
+    minPrice: 0,
     glutenFree: true
   };
   componentDidMount() {
@@ -184,6 +186,9 @@ class ProductProvider extends Component {
     }
     if (type !== "all") {
       filteredItems = filteredItems.filter(item => item.type === type);
+    }
+    if (price.length !== 0) {
+      filteredItems = filteredItems.filter(item => item.price <= price);
     }
     this.setState({ filteredItems });
   };

@@ -11,16 +11,22 @@ const ProductFilter = () => {
           search,
           type,
           price,
+          minPrice,
           glutenFree,
           handleChange,
           filteredItems,
           items
         } = value;
+        let { maxPrice } = value;
         // getting unique types of products for select element
         let productTypes = items.map(item => item.type);
         const productSet = new Set(productTypes);
         productTypes = [...productSet];
         productTypes.unshift("all");
+        // getting the max price
+        const prices = items.map(item => item.price);
+        maxPrice = Math.max(...prices);
+        console.log(maxPrice);
         return (
           <>
             <div className="row mt-5">
@@ -59,15 +65,15 @@ const ProductFilter = () => {
                   </div>
                   {/* price range */}
                   <div>
-                    <label htmlFor="price">price</label>
+                    <label htmlFor="price">price: ${price || maxPrice}</label>
                     <input
                       type="range"
                       name="price"
                       id="price"
                       className="filter-price"
-                      min="0"
-                      max="5"
-                      value={price}
+                      max={maxPrice}
+                      min={minPrice}
+                      value={price || maxPrice}
                       onChange={handleChange}
                     />
                   </div>
