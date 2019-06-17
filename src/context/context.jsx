@@ -26,7 +26,7 @@ class ProductProvider extends Component {
     price: "",
     maxPrice: 0,
     minPrice: 0,
-    glutenFree: true
+    glutenFree: false
   };
   componentDidMount() {
     //ajax request here
@@ -166,7 +166,7 @@ class ProductProvider extends Component {
   };
   handleChange = e => {
     if (e.target.name === "glutenFree") {
-      this.setState({ glutenFree: !this.state.glutenFree }, () => {
+      this.setState({ glutenFree: e.target.checked }, () => {
         this.filterItems();
       });
     } else {
@@ -189,6 +189,9 @@ class ProductProvider extends Component {
     }
     if (price.length !== 0) {
       filteredItems = filteredItems.filter(item => item.price <= price);
+    }
+    if (glutenFree) {
+      filteredItems = filteredItems.filter(item => item.glutenFree);
     }
     this.setState({ filteredItems });
   };

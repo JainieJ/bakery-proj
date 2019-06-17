@@ -201,7 +201,7 @@ const FilterWrapper = styled.div`
     top: 7px;
     width: 8px;
     height: 10px;
-    border: solid var(--mainPink);
+    border: solid var(--mainWhite);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
