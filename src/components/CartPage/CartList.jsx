@@ -9,9 +9,20 @@ const CartList = () => {
         const { cartProducts } = value;
         return (
           <div className="container-fluid">
-            {cartProducts.map(product => {
-              return <CartItem key={product.id} product={product} />;
-            })}
+            {cartProducts.length === 0 ? (
+              <div className="row">
+                <div
+                  className="col 10 mx-auto text-capitalize text-center my-5"
+                  style={{ fontSize: "2rem" }}
+                >
+                  your cart is empty
+                </div>
+              </div>
+            ) : (
+              cartProducts.map(product => {
+                return <CartItem key={product.id} product={product} />;
+              })
+            )}
           </div>
         );
       }}

@@ -152,6 +152,12 @@ class ProductProvider extends Component {
       this.setCartProducts();
     });
   };
+  clearCart = () => {
+    this.setState({ cartProducts: [] }, () => {
+      this.performCalculations();
+      this.setCartProducts();
+    });
+  };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
@@ -180,7 +186,8 @@ class ProductProvider extends Component {
           addToCart: this.addToCart,
           increase: this.increase,
           remove: this.remove,
-          decrease: this.decrease
+          decrease: this.decrease,
+          clearCart: this.clearCart
         }}
       >
         {this.props.children}
