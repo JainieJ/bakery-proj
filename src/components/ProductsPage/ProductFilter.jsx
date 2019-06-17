@@ -73,7 +73,7 @@ const ProductFilter = () => {
                         checked={glutenFree && true}
                         className="checkbox-input"
                       />
-                      <span class="checkmark" />
+                      <span className="checkmark" />
                     </label>
                   </div>
                 </FilterWrapper>

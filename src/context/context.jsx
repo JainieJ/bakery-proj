@@ -163,7 +163,26 @@ class ProductProvider extends Component {
     });
   };
   handleChange = e => {
-    console.log(e.target);
+    if (e.target.name === "glutenFree") {
+      this.setState({ glutenFree: !this.state.glutenFree }, () => {
+        this.filterItems();
+      });
+    } else {
+      this.setState({ [e.target.name]: e.target.value }, () => {
+        this.filterItems();
+      });
+    }
+  };
+  filterItems = () => {
+    let items = [...this.state.items];
+    const { search, type, price, glutenFree } = this.state;
+    let filteredItems = items;
+    if (search.length !== 0) {
+      filteredItems = items.filter(item =>
+        item.title.toLowerCase().includes(search.trim().toLowerCase())
+      );
+    }
+    this.setState({ filteredItems });
   };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
