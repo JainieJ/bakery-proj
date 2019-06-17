@@ -178,9 +178,12 @@ class ProductProvider extends Component {
     const { search, type, price, glutenFree } = this.state;
     let filteredItems = items;
     if (search.length !== 0) {
-      filteredItems = items.filter(item =>
+      filteredItems = filteredItems.filter(item =>
         item.title.toLowerCase().includes(search.trim().toLowerCase())
       );
+    }
+    if (type !== "all") {
+      filteredItems = filteredItems.filter(item => item.type === type);
     }
     this.setState({ filteredItems });
   };

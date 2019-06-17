@@ -13,8 +13,14 @@ const ProductFilter = () => {
           price,
           glutenFree,
           handleChange,
-          filteredItems
+          filteredItems,
+          items
         } = value;
+        // getting unique types of products for select element
+        let productTypes = items.map(item => item.type);
+        const productSet = new Set(productTypes);
+        productTypes = [...productSet];
+        productTypes.unshift("all");
         return (
           <>
             <div className="row mt-5">
@@ -42,9 +48,13 @@ const ProductFilter = () => {
                       value={type}
                       className="filter-item"
                     >
-                      <option value="cake">cake</option>
-                      <option value="cupcake">cupcake</option>
-                      <option value="sweet">sweet</option>
+                      {productTypes.map((type, index) => {
+                        return (
+                          <option key={index} value={type}>
+                            {type}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   {/* price range */}
