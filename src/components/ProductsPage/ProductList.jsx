@@ -8,7 +8,7 @@ const ProductList = () => {
       {value => {
         const { filteredItems } = value;
         return (
-          <div className="row mt-5">
+          <div className="row mt-3">
             {filteredItems.map(item => (
               <ProductItem key={item.id} item={item} />
             ))}

@@ -20,7 +20,11 @@ class ProductProvider extends Component {
     totalCartItems: 0,
     cartSubTotal: 0,
     cartTax: 0,
-    cartTotal: 0
+    cartTotal: 0,
+    search: "",
+    type: "all",
+    price: 0,
+    glutenFree: true
   };
   componentDidMount() {
     //ajax request here
@@ -158,6 +162,9 @@ class ProductProvider extends Component {
       this.setCartProducts();
     });
   };
+  handleChange = e => {
+    console.log(e.target);
+  };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
@@ -187,7 +194,8 @@ class ProductProvider extends Component {
           increase: this.increase,
           remove: this.remove,
           decrease: this.decrease,
-          clearCart: this.clearCart
+          clearCart: this.clearCart,
+          handleChange: this.handleChange
         }}
       >
         {this.props.children}

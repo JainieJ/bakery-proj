@@ -1,6 +1,7 @@
 import React from "react";
 import ProductList from "./ProductList";
 import Title from "./../Title";
+import ProductFilter from "./ProductFilter";
 
 const ProductContent = () => {
   return (
@@ -12,6 +13,8 @@ const ProductContent = () => {
             <Title text="our products" />
           </div>
         </div>
+        {/* product filtering */}
+        <ProductFilter />
         {/* product list */}
         <ProductList />
       </div>
