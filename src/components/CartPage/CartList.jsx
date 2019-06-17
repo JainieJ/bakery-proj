@@ -7,7 +7,6 @@ const CartList = () => {
     <ProductConsumer>
       {value => {
         const { cartProducts } = value;
-        console.log(cartProducts);
         return (
           <div className="container-fluid">
             {cartProducts.map(product => {

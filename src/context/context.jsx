@@ -114,7 +114,44 @@ class ProductProvider extends Component {
       cartTotal
     });
   };
-
+  increase = id => {
+    const tempCartProducts = [...this.state.cartProducts];
+    const currentProduct = tempCartProducts.find(item => item.id === id);
+    currentProduct.amount = currentProduct.amount + 1;
+    const total = parseFloat(
+      (currentProduct.amount * currentProduct.price).toFixed(2)
+    );
+    currentProduct.total = total;
+    this.setState({ cartProducts: tempCartProducts }, () => {
+      this.performCalculations();
+      this.setCartProducts();
+    });
+  };
+  decrease = id => {
+    const tempCartProducts = [...this.state.cartProducts];
+    const currentProduct = tempCartProducts.find(item => item.id === id);
+    if (currentProduct.amount === 1) {
+      this.remove(currentProduct.id);
+    } else {
+      currentProduct.amount = currentProduct.amount - 1;
+      const total = parseFloat(
+        (currentProduct.amount * currentProduct.price).toFixed(2)
+      );
+      currentProduct.total = total;
+      this.setState({ cartProducts: tempCartProducts }, () => {
+        this.performCalculations();
+        this.setCartProducts();
+      });
+    }
+  };
+  remove = id => {
+    const tempCartProducts = [...this.state.cartProducts];
+    const remainingProducts = tempCartProducts.filter(item => item.id !== id);
+    this.setState({ cartProducts: remainingProducts }, () => {
+      this.performCalculations();
+      this.setCartProducts();
+    });
+  };
   toggleSideBar = () => {
     this.setState({ sideBarOpen: !this.state.sideBarOpen });
   };
@@ -140,7 +177,10 @@ class ProductProvider extends Component {
           closeSideBar: this.closeSideBar,
           closeSideCart: this.closeSideCart,
           setSingleProduct: this.setSingleProduct,
-          addToCart: this.addToCart
+          addToCart: this.addToCart,
+          increase: this.increase,
+          remove: this.remove,
+          decrease: this.decrease
         }}
       >
         {this.props.children}

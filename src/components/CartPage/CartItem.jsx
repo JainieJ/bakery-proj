@@ -7,10 +7,11 @@ import {
   FaTrash
 } from "react-icons/fa";
 
-const CartItem = ({ product: { image, title, price, amount, total } }) => {
+const CartItem = ({ product: { image, title, price, amount, total, id } }) => {
   return (
     <ProductConsumer>
       {value => {
+        const { increase, remove, decrease } = value;
         return (
           <CartItemWrapper className="row text-center align-items-center my-3">
             <div className="col-8 mx-auto col-lg-2 my-2">
@@ -29,12 +30,18 @@ const CartItem = ({ product: { image, title, price, amount, total } }) => {
               {price}
             </div>
             <div className="col-8 mx-auto col-lg-2 my-2 item-info text-center">
-              <FaChevronCircleDown className="mr-3 chevron-icon" />
+              <FaChevronCircleDown
+                className="mr-3 chevron-icon"
+                onClick={() => decrease(id)}
+              />
               {amount}
-              <FaChevronCircleUp className="ml-3 chevron-icon" />
+              <FaChevronCircleUp
+                className="ml-3 chevron-icon"
+                onClick={() => increase(id)}
+              />
             </div>
             <div className="col-8 mx-auto col-lg-2 my-2 item-info">
-              <FaTrash className="trash-icon" />
+              <FaTrash className="trash-icon" onClick={() => remove(id)} />
             </div>
             <div className="col-8 mx-auto col-lg-2 my-2 item-info text-muted">
               item total: ${total}
