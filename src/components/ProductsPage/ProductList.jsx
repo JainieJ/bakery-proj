@@ -6,10 +6,14 @@ const ProductList = () => {
   return (
     <ProductConsumer>
       {value => {
-        const { filteredItems } = value;
+        const { filteredItems, loading } = value;
         return (
           <div className="row mt-3">
-            {filteredItems.length === 0 ? (
+            {loading ? (
+              <div className="col-10 mx-auto text-center">
+                <h4 className="text-capitalize">loading data...</h4>
+              </div>
+            ) : filteredItems.length === 0 ? (
               <div className="col-10 mx-auto text-center">
                 <h4
                   className="text-capitalize"

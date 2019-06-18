@@ -27,7 +27,8 @@ class ProductProvider extends Component {
     price: "",
     maxPrice: 0,
     minPrice: 0,
-    glutenFree: false
+    glutenFree: false,
+    loading: true
   };
   componentDidMount() {
     //ajax request here
@@ -52,7 +53,8 @@ class ProductProvider extends Component {
         items: formatedData,
         filteredItems: formatedData,
         singleProduct: this.getSingleProduct(),
-        cartProducts: this.getCartProducts()
+        cartProducts: this.getCartProducts(),
+        loading: false
       },
       () => {
         this.performCalculations();
