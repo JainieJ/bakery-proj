@@ -13,7 +13,7 @@ const SingleProductContent = ({ id }) => {
             <div className="row">
               <div className="col-10 mx-auto col-lg-6 my-3 text-center mr-5 align-self-center">
                 <img
-                  src={`../${singleProduct.image}`}
+                  src={singleProduct.image}
                   alt="store product"
                   className="img-fluid product-img"
                 />
