@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { links } from "./LinkData";
 import { socialLinks } from "./socialLinks";
 import { contactInfo } from "./contactInfo";
-import { items } from "./productData";
+// import { items } from "./productData";
+import { client } from "./contentful";
 
 const Product = React.createContext();
 
@@ -30,7 +31,12 @@ class ProductProvider extends Component {
   };
   componentDidMount() {
     //ajax request here
-    this.setProducts(items);
+    client
+      .getEntries({
+        content_type: "bakery"
+      })
+      .then(response => this.setProducts(response.items))
+      .catch(console.error);
   }
   setProducts = products => {
     //formating data for easy reading

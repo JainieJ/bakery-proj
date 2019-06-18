@@ -26,7 +26,6 @@ const ProductFilter = () => {
         // getting the max price
         const prices = items.map(item => item.price);
         maxPrice = Math.max(...prices);
-        console.log(maxPrice);
         return (
           <>
             <div className="row mt-5">
