@@ -12,7 +12,7 @@ const SideCart = ({ hidden }) => {
       {value => {
         const { closeSideCart, cartProducts, cartTotal } = value;
         return (
-          <SideCartWrapper open={hidden}>
+          <SideCartWrapper closed={hidden}>
             <div className="column">
               {cartProducts.map(product => {
                 return (
@@ -55,7 +55,7 @@ const SideCartWrapper = styled.div`
   z-index: 1;
   border-left: 3px solid var(--mainPink);
   transition: var(--mainTransition);
-  transform: ${props => (props.open ? "translateX(0)" : "translateX(100%)")};
+  transform: ${props => (!props.closed ? "translateX(0)" : "translateX(100%)")};
   overflow-y: scroll;
   .column {
     text-align: center;

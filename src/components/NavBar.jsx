@@ -4,13 +4,17 @@ import { FaBars, FaCartPlus } from "react-icons/fa";
 import logo from "../img/sweet-house.svg";
 import { ProductConsumer } from "../context";
 import { connect } from "react-redux";
-import { toggleCartHidden } from "./../redux/cart/cart.action";
+import { toggleCartHidden } from "../redux/cart/cart.actions";
+import { toggleMenuHidden } from "./../redux/menu/menu.actions";
 
-const NavBar = ({ toggleSideCart }) => {
+//TODO
+//FINISH SWITCHING THIS COMPONENT TO REDUX AND REFACTOR STYLED COMPONENTS
+
+const NavBar = ({ toggleSideCart, toggleSideBar }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { totalCartItems, toggleSideBar } = value;
+        const { totalCartItems } = value;
         return (
           <NavWrapper>
             <div className="nav-center">
@@ -33,7 +37,8 @@ const NavBar = ({ toggleSideCart }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  toggleSideCart: () => dispatch(toggleCartHidden())
+  toggleSideCart: () => dispatch(toggleCartHidden()),
+  toggleSideBar: () => dispatch(toggleMenuHidden())
 });
 
 export default connect(

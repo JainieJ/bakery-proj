@@ -2,14 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ProductConsumer } from "../context/context";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectMenuHidden } from "./../redux/menu/menu.selectors";
 
-const SideBar = () => {
+const SideBar = ({ hidden }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { sideBarOpen, links, closeSideBar } = value;
+        const { links, closeSideBar } = value;
         return (
-          <SideBarWrapper open={sideBarOpen}>
+          <SideBarWrapper closed={hidden}>
             <ul>
               {links.map((link, index) => {
                 return (
@@ -32,7 +35,11 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+const mapStateToProps = createStructuredSelector({
+  hidden: selectMenuHidden
+});
+
+export default connect(mapStateToProps)(SideBar);
 
 const SideBarWrapper = styled.div`
   position: fixed;
@@ -43,7 +50,8 @@ const SideBarWrapper = styled.div`
   z-index: 1;
   border-right: 3px solid var(--mainPink);
   transition: var(--mainTransition);
-  transform: ${props => (props.open ? "translateX(0)" : "translateX(-100%)")};
+  transform: ${props =>
+    !props.closed ? "translateX(0)" : "translateX(-100%)"};
   @media (min-width: 768px) {
     width: 22rem;
   }
