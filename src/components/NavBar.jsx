@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import logo from "../img/sweet-house.svg";
 import { ProductConsumer } from "../context";
+import { connect } from "react-redux";
+import { toggleCartHidden } from "./../redux/cart/cart.action";
 
-const NavBar = () => {
+const NavBar = ({ toggleSideCart }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { totalCartItems, toggleSideBar, toggleSideCart } = value;
+        const { totalCartItems, toggleSideBar } = value;
         return (
           <NavWrapper>
             <div className="nav-center">
@@ -30,7 +32,14 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapDispatchToProps = dispatch => ({
+  toggleSideCart: () => dispatch(toggleCartHidden())
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NavBar);
 
 const NavWrapper = styled.nav`
   position: -webkit-sticky;

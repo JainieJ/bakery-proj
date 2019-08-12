@@ -2,14 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ProductConsumer } from "../context/context";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCartHidden } from "./../redux/cart/cart.selectors";
 
-const SideCart = () => {
+const SideCart = ({ hidden }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { sideCartOPen, closeSideCart, cartProducts, cartTotal } = value;
+        const { closeSideCart, cartProducts, cartTotal } = value;
         return (
-          <SideCartWrapper open={sideCartOPen}>
+          <SideCartWrapper open={hidden}>
             <div className="column">
               {cartProducts.map(product => {
                 return (
@@ -36,7 +39,11 @@ const SideCart = () => {
   );
 };
 
-export default SideCart;
+const mapStateToProps = createStructuredSelector({
+  hidden: selectCartHidden
+});
+
+export default connect(mapStateToProps)(SideCart);
 
 const SideCartWrapper = styled.div`
   position: fixed;
