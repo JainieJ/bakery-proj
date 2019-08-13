@@ -1,7 +1,12 @@
 // render row with columns
 import React from "react";
 import styled from "styled-components";
-import { ProductConsumer } from "../../context";
+import { ProductConsumer } from "../../../context/context";
+import NameSearchInput from "../../name-search-input/name-search-input.component";
+import SelectInput from "../../select-input/select-input.component";
+import PriceRangeInput from "../../price-range/price-range.component";
+import CheckBoxInput from "../../checkbox-input/checkbox-input.component";
+//break down into individual input components
 
 const ProductFilter = () => {
   return (
@@ -31,66 +36,10 @@ const ProductFilter = () => {
             <div className="row mt-5">
               <div className="col-10 mx-auto">
                 <FilterWrapper>
-                  {/* search by name */}
-                  <div>
-                    <label htmlFor="search">search products</label>
-                    <input
-                      type="text"
-                      id="search"
-                      name="search"
-                      value={search}
-                      onChange={handleChange}
-                      className="filter-item"
-                    />
-                  </div>
-                  {/* search by type */}
-                  <div>
-                    <label htmlFor="type">type</label>
-                    <select
-                      name="type"
-                      id="type"
-                      onChange={handleChange}
-                      value={type}
-                      className="filter-item"
-                    >
-                      {productTypes.map((type, index) => {
-                        return (
-                          <option key={index} value={type}>
-                            {type}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  {/* price range */}
-                  <div>
-                    <label htmlFor="price">price: ${price || maxPrice}</label>
-                    <input
-                      type="range"
-                      name="price"
-                      id="price"
-                      className="filter-price"
-                      max={maxPrice}
-                      min={minPrice}
-                      value={price || maxPrice}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {/* gluten free */}
-                  <div>
-                    <label htmlFor="gluten-free" className="check-box">
-                      gluten free
-                      <input
-                        type="checkbox"
-                        name="glutenFree"
-                        id="gluten-free"
-                        onChange={handleChange}
-                        checked={glutenFree && true}
-                        className="checkbox-input"
-                      />
-                      <span className="checkmark" />
-                    </label>
-                  </div>
+                  <NameSearchInput>search products</NameSearchInput>
+                  <SelectInput options={[]}>type</SelectInput>
+                  <PriceRangeInput>{`price: ${5 || maxPrice}`}</PriceRangeInput>
+                  <CheckBoxInput>gluten Free</CheckBoxInput>
                 </FilterWrapper>
               </div>
             </div>
