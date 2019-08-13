@@ -8,10 +8,10 @@ import ProductsPage from "./pages/ProductsPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
-import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import SideCart from "./components/SideCart";
 import Footer from "./components/Footer";
+import NavBar from "./components/navbar/navbar.component";
 
 function App() {
   return (
