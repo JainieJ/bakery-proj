@@ -8,21 +8,33 @@ import CheckBoxInput from "../../checkbox-input/checkbox-input.component";
 import { FilterContainer } from "./product-filter.styles";
 import {
   filterByName,
-  filterByType
+  filterByType,
+  filterByPrice,
+  filterByGluten
 } from "./../../../redux/filter/filter.actions";
 import { createStructuredSelector } from "reselect";
 import {
   selectFilterSearch,
-  selectFilterSelect
+  selectFilterSelect,
+  selectFilterPrice,
+  selectFilterGlutenFree
 } from "./../../../redux/filter/filter.selectors";
-import { selectProductTypes } from "./../../../redux/products/products.selectors";
+import {
+  selectProductTypes,
+  selectProductMaxPrice
+} from "./../../../redux/products/products.selectors";
 
 const ProductFilter = ({
   search,
   productTypes,
   select,
+  maxPrice,
+  price,
+  glutenFree,
   filterByName,
-  filterByType
+  filterByType,
+  filterByPrice,
+  filterByGluten
 }) => {
   return (
     <ProductConsumer>
@@ -30,17 +42,13 @@ const ProductFilter = ({
         const {
           // search,
           type,
-          price,
+          // price,
           minPrice,
-          glutenFree,
+          // glutenFree,
           handleChange,
           filteredItems,
           items
         } = value;
-        let { maxPrice } = value;
-        // getting the max price
-        const prices = items.map(item => item.price);
-        maxPrice = Math.max(...prices);
         return (
           <>
             <div className="row mt-5">
@@ -61,8 +69,20 @@ const ProductFilter = ({
                   >
                     type
                   </SelectInput>
-                  <PriceRangeInput>{`price: ${5 || maxPrice}`}</PriceRangeInput>
-                  <CheckBoxInput>gluten Free</CheckBoxInput>
+                  <PriceRangeInput
+                    attributeName="price"
+                    maxPrice={maxPrice}
+                    minPrice={0}
+                    price={price}
+                    handleChange={filterByPrice}
+                  >{`price: ${price || maxPrice}`}</PriceRangeInput>
+                  <CheckBoxInput
+                    attributeName="glutenFree"
+                    checked={glutenFree}
+                    handleChange={filterByGluten}
+                  >
+                    gluten Free
+                  </CheckBoxInput>
                 </FilterContainer>
               </div>
             </div>
@@ -83,12 +103,17 @@ const ProductFilter = ({
 const mapStateToProps = createStructuredSelector({
   search: selectFilterSearch,
   productTypes: selectProductTypes,
-  select: selectFilterSelect
+  select: selectFilterSelect,
+  maxPrice: selectProductMaxPrice,
+  price: selectFilterPrice,
+  glutenFree: selectFilterGlutenFree
 });
 
 const mapDispatchToProps = dispatch => ({
   filterByName: eventTarget => dispatch(filterByName(eventTarget)),
-  filterByType: eventTarget => dispatch(filterByType(eventTarget))
+  filterByType: eventTarget => dispatch(filterByType(eventTarget)),
+  filterByPrice: eventTarget => dispatch(filterByPrice(eventTarget)),
+  filterByGluten: eventTarget => dispatch(filterByGluten(eventTarget))
 });
 
 export default connect(

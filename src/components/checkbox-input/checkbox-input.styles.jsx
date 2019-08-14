@@ -14,17 +14,6 @@ export const CheckBoxLabelContainer = styled.label`
   user-select: none;
 `;
 
-export const CheckBoxInputContainer = styled.input`
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-  &:checked ~ .checkmark:after {
-    display: block;
-  }
-`;
-
 export const CheckMarkContainer = styled.span`
   position: absolute;
   top: 0;
@@ -49,5 +38,16 @@ export const CheckMarkContainer = styled.span`
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+  }
+`;
+
+export const CheckBoxInputContainer = styled.input`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  &:checked ~ ${CheckMarkContainer}:after {
+    display: block;
   }
 `;

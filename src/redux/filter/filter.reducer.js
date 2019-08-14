@@ -1,6 +1,11 @@
 import { storeProducts } from "./../../context/productData";
 import filterActionTypes from "./filter.types";
-import { filterItemsByName, filterItemsByType } from "./filter.utilities";
+import {
+  filterItemsByName,
+  filterItemsByType,
+  filterItemsByPrice,
+  filterItemsByGluten
+} from "./filter.utilities";
 
 const INITIAL_STATE = {
   search: "",
@@ -10,8 +15,6 @@ const INITIAL_STATE = {
   filteredProducts: storeProducts,
   allProducts: storeProducts
 };
-
-//continue moving filtering functionality to reducer
 
 const filterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -31,6 +34,24 @@ const filterReducer = (state = INITIAL_STATE, action) => {
         filteredProducts: filterItemsByType(
           state.allProducts,
           action.payload.value
+        )
+      };
+    case filterActionTypes.FILTER_BY_PRICE:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+        filteredProducts: filterItemsByPrice(
+          state.allProducts,
+          action.payload.value
+        )
+      };
+    case filterActionTypes.FILTER_BY_GLUTEN:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.checked,
+        filteredProducts: filterItemsByGluten(
+          state.allProducts,
+          action.payload.checked
         )
       };
     default:

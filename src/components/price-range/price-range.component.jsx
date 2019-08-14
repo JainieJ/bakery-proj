@@ -24,7 +24,7 @@ const PriceRangeInput = ({
         max={maxPrice}
         min={minPrice}
         value={price || maxPrice}
-        onChange={handleChange}
+        onChange={e => handleChange(e.target)}
       />
     </div>
   );

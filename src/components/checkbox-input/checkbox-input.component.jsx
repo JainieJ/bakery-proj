@@ -15,7 +15,7 @@ const CheckBoxInput = ({ attributeName, children, checked, handleChange }) => {
           name={attributeName}
           id={attributeName}
           checked={checked && true}
-          onChange={handleChange}
+          onChange={e => handleChange(e.target)}
         />
         <CheckMarkContainer />
       </CheckBoxLabelContainer>

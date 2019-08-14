@@ -11,3 +11,13 @@ export const selectFilterSelect = createSelector(
   [selectFilter],
   filter => filter.select
 );
+
+export const selectFilterPrice = createSelector(
+  [selectFilter],
+  filter => filter.price
+);
+
+export const selectFilterGlutenFree = createSelector(
+  [selectFilter],
+  filter => filter.glutenFree
+);
