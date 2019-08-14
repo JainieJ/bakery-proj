@@ -21,3 +21,8 @@ export const selectFilterGlutenFree = createSelector(
   [selectFilter],
   filter => filter.glutenFree
 );
+
+export const selectFilteredProducts = createSelector(
+  [selectFilter],
+  filter => filter.filteredProducts
+);

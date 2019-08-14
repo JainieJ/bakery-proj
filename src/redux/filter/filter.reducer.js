@@ -1,11 +1,6 @@
 import { storeProducts } from "./../../context/productData";
 import filterActionTypes from "./filter.types";
-import {
-  filterItemsByName,
-  filterItemsByType,
-  filterItemsByPrice,
-  filterItemsByGluten
-} from "./filter.utilities";
+import { filterProducts } from "./filter.utilities";
 
 const INITIAL_STATE = {
   search: "",
@@ -22,8 +17,9 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
-        filteredProducts: filterItemsByName(
-          state.allProducts,
+        filteredProducts: filterProducts(
+          state,
+          action.payload.name,
           action.payload.value
         )
       };
@@ -31,8 +27,9 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
-        filteredProducts: filterItemsByType(
-          state.allProducts,
+        filteredProducts: filterProducts(
+          state,
+          action.payload.name,
           action.payload.value
         )
       };
@@ -40,8 +37,9 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
-        filteredProducts: filterItemsByPrice(
-          state.allProducts,
+        filteredProducts: filterProducts(
+          state,
+          action.payload.name,
           action.payload.value
         )
       };
@@ -49,9 +47,10 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.checked,
-        filteredProducts: filterItemsByGluten(
-          state.allProducts,
-          action.payload.checked
+        filteredProducts: filterProducts(
+          state,
+          action.payload.name,
+          action.payload.value
         )
       };
     default:
