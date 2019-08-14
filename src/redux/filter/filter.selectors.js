@@ -1,0 +1,13 @@
+import { createSelector } from "reselect";
+
+const selectFilter = state => state.filter;
+
+export const selectFilterSearch = createSelector(
+  [selectFilter],
+  filter => filter.search
+);
+
+export const selectFilterSelect = createSelector(
+  [selectFilter],
+  filter => filter.select
+);

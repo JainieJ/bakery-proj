@@ -1,12 +1,14 @@
+import { storeProducts } from "./../../context/productData";
 import filterActionTypes from "./filter.types";
-import { filterItemsByName } from "./filter.utilities";
+import { filterItemsByName, filterItemsByType } from "./filter.utilities";
 
 const INITIAL_STATE = {
   search: "",
   select: "all",
   price: "",
   glutenFree: false,
-  filteredItems: []
+  filteredProducts: storeProducts,
+  allProducts: storeProducts
 };
 
 //continue moving filtering functionality to reducer
@@ -17,9 +19,18 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
-        filteredItems: filterItemsByName(
-          state.filteredItems,
-          state[action.payload.value]
+        filteredProducts: filterItemsByName(
+          state.allProducts,
+          action.payload.value
+        )
+      };
+    case filterActionTypes.FILTER_BY_TYPE:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+        filteredProducts: filterItemsByType(
+          state.allProducts,
+          action.payload.value
         )
       };
     default:

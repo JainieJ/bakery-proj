@@ -4,7 +4,7 @@ import { SelectContainer, SelectLabelContainer } from "./select-input.styles";
 const SelectInput = ({
   attributeName,
   children,
-  type,
+  value,
   options,
   handleChange
 }) => {
@@ -16,8 +16,8 @@ const SelectInput = ({
       <SelectContainer
         name={attributeName}
         id={attributeName}
-        value={type}
-        onChange={handleChange}
+        value={value}
+        onChange={e => handleChange(e.target)}
       >
         {options.map((type, index) => {
           return (

@@ -4,7 +4,7 @@ import {
   NameSearchLabelContainer
 } from "./name-search-input.styles";
 
-const NameSearchInput = ({ attributeName, children, search, handleChange }) => {
+const NameSearchInput = ({ attributeName, children, value, handleChange }) => {
   return (
     <div>
       <NameSearchLabelContainer htmlFor={attributeName}>
@@ -14,8 +14,8 @@ const NameSearchInput = ({ attributeName, children, search, handleChange }) => {
         type="text"
         id={attributeName}
         name={attributeName}
-        value={search}
-        onChange={handleChange}
+        value={value}
+        onChange={e => handleChange(e.target)}
       />
     </div>
   );
