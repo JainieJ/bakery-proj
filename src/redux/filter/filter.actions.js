@@ -1,5 +1,9 @@
 import filterActionTypes from "./filter.types";
 
+export const updateProducts = items => ({
+  type: filterActionTypes.UPDATE_PRODUCTS,
+  payload: items
+});
 export const filterByName = eventTarget => ({
   type: filterActionTypes.FILTER_BY_NAME,
   payload: eventTarget

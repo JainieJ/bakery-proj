@@ -10,7 +10,7 @@ const filterItemsByType = (items, query) =>
 const filterItemsByPrice = (items, query) =>
   items.filter(item => item.price <= Number(query));
 
-const filterItemsByGluten = (items, query) => items.filter(item => item[query]);
+const filterItemsByGluten = items => items.filter(item => item.glutenFree);
 // end of helper functions of filterProducts function
 
 export const filterProducts = (currentState, name, value) => {
@@ -29,7 +29,7 @@ export const filterProducts = (currentState, name, value) => {
     items = filterItemsByPrice(items, price);
   }
   if (glutenFree) {
-    items = filterItemsByGluten(items, glutenFree);
+    items = filterItemsByGluten(items);
   }
   return items;
 };

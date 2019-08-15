@@ -28,17 +28,17 @@ class ProductProvider extends Component {
     maxPrice: 0,
     minPrice: 0,
     glutenFree: false,
-    loading: true
+    loading: false
   };
-  componentDidMount() {
-    //ajax request here
-    client
-      .getEntries({
-        content_type: "bakery"
-      })
-      .then(response => this.setProducts(response.items))
-      .catch(console.error);
-  }
+  // componentDidMount() {
+  //   //ajax request here
+  //   client
+  //     .getEntries({
+  //       content_type: "bakery"
+  //     })
+  //     .then(response => this.setProducts(response.items))
+  //     .catch(console.error);
+  // }
   setProducts = products => {
     //formating data for easy reading
     const formatedData = products.map(product => {

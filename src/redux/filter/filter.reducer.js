@@ -1,4 +1,3 @@
-import { storeProducts } from "./../../context/productData";
 import filterActionTypes from "./filter.types";
 import { filterProducts } from "./filter.utilities";
 
@@ -7,12 +6,13 @@ const INITIAL_STATE = {
   select: "all",
   price: "",
   glutenFree: false,
-  filteredProducts: storeProducts,
-  allProducts: storeProducts
+  filteredProducts: []
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case filterActionTypes.UPDATE_PRODUCTS:
+      return { ...state, filteredProducts: action.payload };
     case filterActionTypes.FILTER_BY_NAME:
       return {
         ...state,
