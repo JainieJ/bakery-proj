@@ -1,6 +1,6 @@
 import React from "react";
-import { ProductConsumer } from "../../context/context";
-import ProductItem from "./ProductItem";
+import { ProductConsumer } from "../../../context/context";
+import ProductItem from "../ProductItem";
 
 const ProductList = () => {
   return (

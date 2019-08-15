@@ -1,27 +1,35 @@
+//helper functions of filterProducts function
+const filterItemsByName = (items, query) =>
+  items.filter(item =>
+    item.title.toLowerCase().includes(query.trim().toLowerCase())
+  );
+
+const filterItemsByType = (items, query) =>
+  items.filter(item => item.type === query);
+
+const filterItemsByPrice = (items, query) =>
+  items.filter(item => item.price <= Number(query));
+
+const filterItemsByGluten = (items, query) => items.filter(item => item[query]);
+// end of helper functions of filterProducts function
+
 export const filterProducts = (currentState, name, value) => {
-  console.log("filterProducts is running");
   let items = [...currentState.allProducts];
   const settings = { ...currentState, [name]: value };
   const { search, select, price, glutenFree } = settings;
   if (search.length !== 0) {
-    items = items.filter(item =>
-      item.title.toLowerCase().includes(search.trim().toLowerCase())
-    );
+    items = filterItemsByName(items, search);
+    console.log(items);
   }
   if (select !== "all") {
-    items = items.filter(item => {
-      console.log("select is running");
-      return item.type === select;
-    });
+    items = filterItemsByType(items, select);
+    console.log(items);
   }
   if (price.length !== 0) {
-    items = items.filter(item => item.price <= price);
+    items = filterItemsByPrice(items, price);
   }
   if (glutenFree) {
-    items = items.filter(item => item.glutenFree);
+    items = filterItemsByGluten(items, glutenFree);
   }
   return items;
 };
-
-//TODO!!! ALLOCATE FILTERING LOGIC FOR EACH IF TO SEPARATE FUNCTIONS. THESE FUNCTIONS
-//SHOULD HAVE MEMOIZATION SO AS NOT TO FILTER IS THE VALUE TO FILTER BY HAS NOT CHANGED

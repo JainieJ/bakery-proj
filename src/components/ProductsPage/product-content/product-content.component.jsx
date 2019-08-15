@@ -1,5 +1,5 @@
 import React from "react";
-import ProductList from "../ProductList";
+import ProductList from "../product-list/product-list.component";
 import Title from "../../Title";
 import ProductFilter from "../product-filter/product-filter.component";
 
