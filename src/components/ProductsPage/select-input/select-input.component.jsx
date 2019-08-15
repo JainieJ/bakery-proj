@@ -7,7 +7,6 @@ import { filterByType } from "../../../redux/filter/filter.actions";
 import { SelectContainer, SelectLabelContainer } from "./select-input.styles";
 
 const SelectInput = ({ productTypes, select, filterByType }) => {
-  console.log("SelectInput is rerendering");
   return (
     <div>
       <SelectLabelContainer htmlFor="select">type</SelectLabelContainer>

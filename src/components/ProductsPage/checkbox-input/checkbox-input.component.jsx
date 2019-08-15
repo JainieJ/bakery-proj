@@ -10,7 +10,6 @@ import {
 } from "./checkbox-input.styles";
 
 const CheckBoxInput = ({ glutenFree, filterByGluten }) => {
-  console.log("CheckBoxInput is rerendering");
   return (
     <div>
       <CheckBoxLabelContainer htmlFor="glutenFree">

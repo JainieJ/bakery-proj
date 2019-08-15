@@ -10,7 +10,6 @@ import {
 } from "./price-range.styles";
 
 const PriceRangeInput = ({ maxPrice, price, filterByPrice }) => {
-  console.log("PriceRangeInput is rerendering");
   return (
     <div>
       <PriceRangeLabelContainer htmlFor="price">

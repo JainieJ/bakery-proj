@@ -9,7 +9,6 @@ import {
 } from "./name-search-input.styles";
 
 const NameSearchInput = ({ search, filterByName }) => {
-  console.log("NameSearchInput is rerendering");
   return (
     <div>
       <NameSearchLabelContainer htmlFor="search">

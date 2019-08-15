@@ -5,6 +5,8 @@ import ProductItem from "../ProductItem";
 import { createStructuredSelector } from "reselect";
 import { selectFilteredProducts } from "./../../../redux/filter/filter.selectors";
 
+//continue working on product lis component
+
 const ProductList = ({ filteredProducts }) => {
   return (
     <ProductConsumer>
