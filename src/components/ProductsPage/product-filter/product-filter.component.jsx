@@ -7,7 +7,6 @@ import FilterTotal from "./../filter-total-products/filter-total.component";
 import { FilterContainer } from "./product-filter.styles";
 
 const ProductFilter = () => {
-  console.log("filter component is rerendering");
   return (
     <>
       <div className="row mt-5">

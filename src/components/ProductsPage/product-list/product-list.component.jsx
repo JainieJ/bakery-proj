@@ -1,44 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ProductConsumer } from "../../../context/context";
 import ProductItem from "../ProductItem";
 import { createStructuredSelector } from "reselect";
 import { selectFilteredProducts } from "./../../../redux/filter/filter.selectors";
-
-//continue working on product lis component
+import { NoMatchNotificationContainer } from "./product-list.styles";
 
 const ProductList = ({ filteredProducts }) => {
   return (
-    <ProductConsumer>
-      {value => {
-        const { loading } = value;
-        return (
-          <div className="row mt-3">
-            {loading ? (
-              <div className="col-10 mx-auto text-center">
-                <h4 className="text-capitalize">loading data...</h4>
-              </div>
-            ) : filteredProducts.length === 0 ? (
-              <div className="col-10 mx-auto text-center">
-                <h4
-                  className="text-capitalize"
-                  style={{
-                    fontFamily: "Open-Sans, sans-serif",
-                    letterSpacing: "0.3rem"
-                  }}
-                >
-                  sorry, no items matched your search
-                </h4>
-              </div>
-            ) : (
-              filteredProducts.map(item => (
-                <ProductItem key={item.id} item={item} />
-              ))
-            )}
-          </div>
-        );
-      }}
-    </ProductConsumer>
+    <div className="row mt-3">
+      {filteredProducts.length === 0 ? (
+        <div className="col-10 mx-auto text-center">
+          <NoMatchNotificationContainer>
+            sorry, no items matched your search
+          </NoMatchNotificationContainer>
+        </div>
+      ) : (
+        filteredProducts.map(item => <ProductItem key={item.id} item={item} />)
+      )}
+    </div>
   );
 };
 

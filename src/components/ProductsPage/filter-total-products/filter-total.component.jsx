@@ -4,7 +4,6 @@ import { createStructuredSelector } from "reselect";
 import { selectFilteredProducts } from "./../../../redux/filter/filter.selectors";
 
 const FilterTotal = ({ filteredProducts }) => {
-  console.log("filtertotal is rerendering");
   return (
     <div className="row mt-3">
       <div className="col-10 mx-auto">

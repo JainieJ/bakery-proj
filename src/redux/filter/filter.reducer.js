@@ -6,13 +6,18 @@ const INITIAL_STATE = {
   select: "all",
   price: "",
   glutenFree: false,
-  filteredProducts: []
+  filteredProducts: [],
+  allProducts: []
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case filterActionTypes.UPDATE_PRODUCTS:
-      return { ...state, filteredProducts: action.payload };
+      return {
+        ...state,
+        filteredProducts: action.payload,
+        allProducts: action.payload
+      };
     case filterActionTypes.FILTER_BY_NAME:
       return {
         ...state,
