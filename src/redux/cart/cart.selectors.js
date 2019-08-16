@@ -9,10 +9,10 @@ export const selectCartHidden = createSelector(
 
 export const selectCartItems = createSelector(
   [selectCart],
-  cart => cart.items
+  cart => cart.cartItems
 );
 
 export const selectCartItemsTotal = createSelector(
   [selectCartItems],
-  items => items.reduce((acc, curr) => acc + curr.quantity, 5)
+  cartItems => cartItems.reduce((acc, curr) => acc + curr.quantity, 5)
 );
