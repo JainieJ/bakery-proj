@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import DefaultPage from "./pages/DefaultPage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
-import SingleProductPage from "./pages/SingleProductPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 import SideBar from "./components/SideBar";
@@ -21,9 +20,8 @@ function App() {
       <SideCart />
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/products" exact component={ProductsPage} />
-        <Route path="/products/:id" component={SingleProductPage} />
+        <Route path="/about" exact component={AboutPage} />
+        <Route path="/products" component={ProductsPage} />
         <Route path="/contact" exact component={ContactPage} />
         <Route path="/cart" exact component={CartPage} />
         <Route component={DefaultPage} />
