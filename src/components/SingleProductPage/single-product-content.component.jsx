@@ -2,12 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { ProductConsumer } from "../../context/context";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { selectSingleProduct } from "../../redux/products/products.selectors";
 
-const SingleProductContent = ({ id }) => {
+const SingleProductContent = ({ singleProduct }) => {
   return (
     <ProductConsumer>
       {value => {
-        const { singleProduct, addToCart, loading } = value;
+        const { addToCart, loading } = value;
         return (
           <SingleProductWrapper className="container py-5">
             {loading ? (
@@ -57,7 +60,11 @@ const SingleProductContent = ({ id }) => {
   );
 };
 
-export default SingleProductContent;
+const mapStateToProps = (state, ownProps) => ({
+  singleProduct: selectSingleProduct(ownProps.match.params.id)(state)
+});
+
+export default withRouter(connect(mapStateToProps)(SingleProductContent));
 
 const SingleProductWrapper = styled.div`
   .price {
@@ -74,7 +81,9 @@ const SingleProductWrapper = styled.div`
     font-size: 1.5rem;
     font-family: "Open Sans", sans-serif;
     margin-bottom: 3rem !important;
-  }
+  }import { withRouter } from 'react-router';
+import { selectSingleProduct } from './../../redux/products/products.selectors';
+
   .product-img {
     border: 8px solid var(--mainYellow);
   }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { client } from "./../context/contentful";
 import { updateProducts } from "./../redux/filter/filter.actions";
+import { setProducts } from "./../redux/products/products.actions";
 import productsBcg from "../img/productsBcg.jpg";
 import Hero from "./../components/Hero";
 import ProductContent from "../components/ProductsPage/product-content/product-content.component";
@@ -14,7 +15,7 @@ class ProductsPage extends Component {
     loading: true
   };
   componentDidMount() {
-    const { updateProducts } = this.props;
+    const { updateProducts, setProducts } = this.props;
     client
       .getEntries({
         content_type: "bakery"
@@ -25,6 +26,7 @@ class ProductsPage extends Component {
           ...product.fields,
           image: product.fields.image.fields.file.url
         }));
+        setProducts(formatedData);
         updateProducts(formatedData);
         this.setState({ loading: false });
       })
@@ -42,7 +44,8 @@ class ProductsPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateProducts: products => dispatch(updateProducts(products))
+  updateProducts: products => dispatch(updateProducts(products)),
+  setProducts: products => dispatch(setProducts(products))
 });
 
 export default connect(

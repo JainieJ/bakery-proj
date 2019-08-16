@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
-import { ProductConsumer } from "../../context/context";
+import { ProductConsumer } from "../../../context/context";
 
-const ProductItem = ({ item: { image, price, title, id } }) => {
+const ProductItem = ({ image, price, title, id, history, match }) => {
   return (
     <ProductConsumer>
       {value => {
@@ -19,12 +19,10 @@ const ProductItem = ({ item: { image, price, title, id } }) => {
                   className="card-img-top product-img"
                 />
                 <div className="icon-container">
-                  <Link to={`/products/${id}`}>
-                    <FaSearch
-                      className="icon"
-                      onClick={() => setSingleProduct(id)}
-                    />
-                  </Link>
+                  <FaSearch
+                    className="icon"
+                    onClick={() => history.push(`${match.path}/${id}`)}
+                  />
                   <FaShoppingCart
                     className="icon"
                     onClick={() => addToCart(id)}
@@ -43,7 +41,7 @@ const ProductItem = ({ item: { image, price, title, id } }) => {
   );
 };
 
-export default ProductItem;
+export default withRouter(ProductItem);
 
 const ItemWrapper = styled.div`
   .img-container {

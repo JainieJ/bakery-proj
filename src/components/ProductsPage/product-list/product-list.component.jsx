@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import ProductItem from "../ProductItem";
 import { createStructuredSelector } from "reselect";
 import { selectFilteredProducts } from "./../../../redux/filter/filter.selectors";
+import ProductItem from "../product-item/product-item.component";
 import { NoMatchNotificationContainer } from "./product-list.styles";
 
 const ProductList = ({ filteredProducts }) => {
@@ -15,7 +15,7 @@ const ProductList = ({ filteredProducts }) => {
           </NoMatchNotificationContainer>
         </div>
       ) : (
-        filteredProducts.map(item => <ProductItem key={item.id} item={item} />)
+        filteredProducts.map(item => <ProductItem key={item.id} {...item} />)
       )}
     </div>
   );
