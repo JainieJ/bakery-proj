@@ -1,86 +1,50 @@
 import React from "react";
-import styled from "styled-components";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
-import { ProductConsumer } from "../../../context/context";
+import { addItem } from "../../../redux/cart/cart.actions";
+import {
+  ImageContainer,
+  IconContainer,
+  SearchIconContainer,
+  ShoppingCartContainer,
+  ProductContainer,
+  ProductDescriptionContainer
+} from "./product-item.styles";
 
-const ProductItem = ({ image, price, title, id, history, match }) => {
+const ProductItem = ({ item, history, match, addItem }) => {
+  const { image, price, title, id } = item;
   return (
-    <ProductConsumer>
-      {value => {
-        const { setSingleProduct, addToCart } = value;
-        return (
-          <ItemWrapper className="col-10 mx-auto my-3 col-sm-6 col-lg-4">
-            <div className="card">
-              <div className="img-container">
-                <img
-                  src={image}
-                  alt="store item"
-                  className="card-img-top product-img"
-                />
-                <div className="icon-container">
-                  <FaSearch
-                    className="icon"
-                    onClick={() => history.push(`${match.path}/${id}`)}
-                  />
-                  <FaShoppingCart
-                    className="icon"
-                    onClick={() => addToCart(id)}
-                  />
-                </div>
-              </div>
-              <div className="card-body d-flex justify-content-between">
-                <p className="mb-0 text-capitalize">{title}</p>
-                <p className="mb-0">${price}</p>
-              </div>
-            </div>
-          </ItemWrapper>
-        );
-      }}
-    </ProductConsumer>
+    <div className="col-10 mx-auto my-3 col-sm-6 col-lg-4">
+      <div className="card">
+        <ProductContainer>
+          <ImageContainer
+            src={image}
+            alt="store item"
+            className="card-img-top"
+          />
+          <IconContainer>
+            <SearchIconContainer
+              onClick={() => history.push(`${match.path}/${id}`)}
+            />
+            <ShoppingCartContainer onClick={() => addItem(item)} />
+          </IconContainer>
+        </ProductContainer>
+        <ProductDescriptionContainer className="card-body ">
+          <p>{title}</p>
+          <p>${price}</p>
+        </ProductDescriptionContainer>
+      </div>
+    </div>
   );
 };
 
-export default withRouter(ProductItem);
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addItem(item))
+});
 
-const ItemWrapper = styled.div`
-  .img-container {
-    position: relative;
-    overflow: hidden;
-  }
-  .product-img {
-    transition: var(--mainTransition);
-  }
-  .img-container:hover .product-img {
-    cursor: pointer;
-    transform: scale(1.2);
-    opacity: 0.5;
-  }
-  .icon-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .icon {
-    font-size: 2.5rem;
-    margin: 0 0.6rem;
-    background: var(--mainYellow);
-    padding: 0.3rem;
-    border-radius: 0.4rem;
-    color: var(--mainBlack);
-    opacity: 0;
-    transition: var(--mainTransition);
-  }
-  .icon:hover {
-    color: var(--mainWhite);
-    cursor: pointer;
-  }
-  .img-container:hover .icon {
-    opacity: 1;
-  }
-  p {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-`;
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(ProductItem)
+);

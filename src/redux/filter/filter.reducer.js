@@ -55,7 +55,7 @@ const filterReducer = (state = INITIAL_STATE, action) => {
         filteredProducts: filterProducts(
           state,
           action.payload.name,
-          action.payload.value
+          action.payload.checked
         )
       };
     default:

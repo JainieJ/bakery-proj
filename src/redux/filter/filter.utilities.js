@@ -17,6 +17,7 @@ export const filterProducts = (currentState, name, value) => {
   let items = [...currentState.allProducts];
   const settings = { ...currentState, [name]: value };
   const { search, select, price, glutenFree } = settings;
+  console.log(glutenFree);
   if (search.length !== 0) {
     items = filterItemsByName(items, search);
     console.log(items);

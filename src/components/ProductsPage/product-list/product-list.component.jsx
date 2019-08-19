@@ -15,7 +15,7 @@ const ProductList = ({ filteredProducts }) => {
           </NoMatchNotificationContainer>
         </div>
       ) : (
-        filteredProducts.map(item => <ProductItem key={item.id} {...item} />)
+        filteredProducts.map(item => <ProductItem key={item.id} item={item} />)
       )}
     </div>
   );
