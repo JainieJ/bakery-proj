@@ -8,9 +8,9 @@ import ProductsPage from "./pages/ProductsPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 import SideBar from "./components/SideBar";
-import SideCart from "./components/SideCart";
 import Footer from "./components/Footer";
 import NavBar from "./components/navbar/navbar.component";
+import SideCart from "./components/side-cart/side-cart.component";
 
 function App() {
   return (

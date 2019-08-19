@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import { toggleMenuHidden } from "../../redux/menu/menu.actions";
 import { createStructuredSelector } from "reselect";
-import { selectCartItemsTotal } from "../../redux/cart/cart.selectors";
+import { selectCartItemsTotalCount } from "../../redux/cart/cart.selectors";
 import logo from "../../img/sweet-house.svg";
 import {
   NavContainer,
@@ -34,7 +34,7 @@ const NavBar = ({ toggleSideCart, toggleSideBar, cartItemsTotal }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  cartItemsTotal: selectCartItemsTotal
+  cartItemsTotal: selectCartItemsTotalCount
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -12,7 +12,29 @@ export const selectCartItems = createSelector(
   cart => cart.cartItems
 );
 
-export const selectCartItemsTotal = createSelector(
+export const selectCartItemsTotalCount = createSelector(
   [selectCartItems],
-  cartItems => cartItems.reduce((acc, curr) => acc + curr.quantity, 5)
+  cartItems => cartItems.reduce((acc, curr) => acc + curr.quantity, 0)
+);
+
+export const selectCartItemsSubTotal = createSelector(
+  [selectCartItems],
+  cartItems => {
+    const subtotal = cartItems.reduce(
+      (acc, curr) => acc + curr.quantity * curr.price,
+      0
+    );
+    return parseFloat(subtotal.toFixed(2));
+  }
+);
+
+export const selectCartItemsSubTotalWithTaxes = createSelector(
+  [selectCartItemsSubTotal],
+  cartItemsSubtotal => parseFloat((cartItemsSubtotal * 0.2).toFixed(2))
+);
+
+export const selectCartItemsTotal = createSelector(
+  [selectCartItemsSubTotal, selectCartItemsSubTotalWithTaxes],
+  (cartItemsSubtotal, cartItemsSubtotalWithTaxes) =>
+    parseFloat((cartItemsSubtotal + cartItemsSubtotalWithTaxes).toFixed(2))
 );
