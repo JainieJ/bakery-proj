@@ -7,16 +7,16 @@ import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
-import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
 import NavBar from "./components/navbar/navbar.component";
 import SideCart from "./components/side-cart/side-cart.component";
+import SideMenu from "./components/side-menu/side-menu.component";
 
 function App() {
   return (
     <>
       <NavBar />
-      <SideBar />
+      <SideMenu />
       <SideCart />
       <Switch>
         <Route path="/" exact component={HomePage} />
