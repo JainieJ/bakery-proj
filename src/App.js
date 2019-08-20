@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import NavBar from "./components/navbar/navbar.component";
 import SideCart from "./components/side-cart/side-cart.component";
 import SideMenu from "./components/side-menu/side-menu.component";
+import SignInAndSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products" component={ProductsPage} />
         <Route path="/contact" exact component={ContactPage} />
         <Route path="/cart" exact component={CartPage} />
+        <Route path="/signin" exact component={SignInAndSignUpPage} />
         <Route component={DefaultPage} />
       </Switch>
       <Footer />
