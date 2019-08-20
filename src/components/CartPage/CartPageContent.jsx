@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../Title";
 import CartColumns from "./CartColumns";
-import CartList from "./CartList";
+import CartList from "./cart-list/cart-list.component";
 import CartTotal from "./CartTotal";
 
 const CartPageContent = () => {
