@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { SignInContainer, TitleContainer } from "./sign-in.styles";
+import {
+  SignInContainer,
+  TitleContainer,
+  AccountContainer
+} from "./sign-in.styles";
 import FormInput from "./../form-input/form-input.component";
 import { auth } from "./../../firebase/firebase.utils";
 
@@ -25,8 +29,8 @@ class SingIn extends Component {
     const { email, password } = this.state;
     return (
       <SignInContainer>
-        <TitleContainer>I already have an account</TitleContainer>
-        <span>Sign in with your email and password</span>
+        <AccountContainer>I already have an account</AccountContainer>
+        <TitleContainer>Sign in with your email and password</TitleContainer>
         <form onSubmit={this.handleSubmit}>
           <FormInput
             type="email"
@@ -36,6 +40,7 @@ class SingIn extends Component {
             required
             handleChange={this.handleChange}
             label="email"
+            placeholder="Email address"
           />
           <FormInput
             type="password"
@@ -45,6 +50,7 @@ class SingIn extends Component {
             required
             handleChange={this.handleChange}
             label="password"
+            placeholder="Password"
           />
           <button type="submit" className="main-link">
             Sign In
