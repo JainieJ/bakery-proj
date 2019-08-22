@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { setUser } from "../../redux/user/user.actions";
 import FormInput from "./../form-input/form-input.component";
 import {
   auth,
@@ -21,6 +23,7 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
+    const { history, setUser } = this.props;
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -30,7 +33,9 @@ class SignUp extends Component {
         email,
         password
       );
-      await createUserProfileDocument(user, { displayName });
+      const loggedInUser = await createUserProfileDocument(user, {
+        displayName
+      });
       this.setState(
         {
           displayName: "",
@@ -38,11 +43,24 @@ class SignUp extends Component {
           password: "",
           confirmPassword: ""
         },
-        () => this.props.history.push("/")
+        () => {
+          setUser(loggedInUser);
+          history.push("/");
+        }
       );
     } catch (e) {
+      const errorCode = e.code;
       const errorMessage = e.message;
-      alert(errorMessage);
+      switch (errorCode) {
+        case "auth/email-already-in-use":
+          alert("The account with the given email address already exists");
+          break;
+        case "auth/weak-password":
+          alert(errorMessage);
+          break;
+        default:
+          console.log(errorMessage);
+      }
       console.log(e);
     }
   };
@@ -101,4 +119,13 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(SignUp);
+const mapDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(SignUp)
+);

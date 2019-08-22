@@ -6,7 +6,9 @@ import {
   AccountContainer
 } from "./sign-in.styles";
 import FormInput from "./../form-input/form-input.component";
-import { auth } from "./../../firebase/firebase.utils";
+import { auth, firestore } from "./../../firebase/firebase.utils";
+import { connect } from "react-redux";
+import { setUser } from "./../../redux/user/user.actions";
 
 class SingIn extends Component {
   state = {
@@ -16,19 +18,42 @@ class SingIn extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
+    const { setUser } = this.props;
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" }, () =>
-        this.props.history.push("/")
-      );
+      const {
+        user: { uid }
+      } = await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" }, async () => {
+        setUser(await this.getLoggedInUser(uid));
+        this.props.history.push("/");
+      });
     } catch (e) {
+      const errorCode = e.code;
       const errorMessage = e.message;
-      alert(errorMessage);
+      switch (errorCode) {
+        case "auth/user-not-found":
+          alert("User with this email was not found");
+          break;
+        case "auth/wrong-password":
+          alert("You entered a wrong password");
+          break;
+        default:
+          console.log(errorMessage);
+      }
       console.log(e);
     }
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+  getLoggedInUser = async id => {
+    try {
+      const userRef = firestore.doc(`users/${id}`);
+      const snapShot = await userRef.get();
+      return snapShot.data();
+    } catch (e) {
+      console.log(e);
+    }
   };
   render() {
     const { email, password } = this.state;
@@ -66,4 +91,13 @@ class SingIn extends Component {
   }
 }
 
-export default withRouter(SingIn);
+const mapDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(SingIn)
+);
