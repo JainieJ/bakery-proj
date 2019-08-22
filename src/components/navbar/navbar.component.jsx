@@ -11,23 +11,31 @@ import {
   MenuIconContainer,
   ShopIconContainer,
   NavCartContainer,
-  ItemsCountContainer
+  ItemsCountContainer,
+  GreetingAndShopIconContainer,
+  LogoContainer
 } from "./navbar.styles";
+import Greeting from "../greeting/greeting.component";
 
 const NavBar = ({ toggleSideCart, toggleSideBar, cartItemsTotal }) => {
   return (
     <NavContainer>
       <NavContentContainer>
         <MenuIconContainer onClick={toggleSideBar} />
-        <img
-          src={logo}
-          alt="company logo"
-          style={{ width: "70px", height: "70px" }}
-        />
-        <NavCartContainer>
-          <ShopIconContainer onClick={toggleSideCart} />
-          <ItemsCountContainer>{cartItemsTotal}</ItemsCountContainer>
-        </NavCartContainer>
+        <LogoContainer>
+          <img
+            src={logo}
+            alt="company logo"
+            style={{ width: "70px", height: "70px" }}
+          />
+        </LogoContainer>
+        <GreetingAndShopIconContainer>
+          <Greeting />
+          <NavCartContainer>
+            <ShopIconContainer onClick={toggleSideCart} />
+            <ItemsCountContainer>{cartItemsTotal}</ItemsCountContainer>
+          </NavCartContainer>
+        </GreetingAndShopIconContainer>
       </NavContentContainer>
     </NavContainer>
   );

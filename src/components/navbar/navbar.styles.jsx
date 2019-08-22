@@ -27,6 +27,7 @@ export const NavContentContainer = styled.div`
 `;
 
 export const MenuIconContainer = styled(FaBars)`
+  width: 30%;
   ${navIconStyles}
 `;
 
@@ -47,4 +48,16 @@ export const ItemsCountContainer = styled.div`
   top: -8px;
   right: -15px;
   border-radius: 50%;
+`;
+
+export const GreetingAndShopIconContainer = styled.div`
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const LogoContainer = styled.div`
+  width: 30%;
+  text-align: center;
 `;

@@ -1,11 +1,11 @@
 import userActionTypes from "./user.types";
 
-const INITIAL_STATE = { user: null };
+const INITIAL_STATE = { loggedInUser: {} };
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case userActionTypes.LOG_IN:
-      return { ...state, user: action.payload };
+      return { ...state, loggedInUser: action.payload };
     default:
       return state;
   }
