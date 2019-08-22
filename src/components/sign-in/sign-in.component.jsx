@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import {
   SignInContainer,
   TitleContainer,
@@ -17,9 +18,13 @@ class SingIn extends Component {
     const { email, password } = this.state;
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
+      this.setState({ email: "", password: "" }, () =>
+        this.props.history.push("/")
+      );
     } catch (e) {
-      console.error(e);
+      const errorMessage = e.message;
+      alert(errorMessage);
+      console.log(e);
     }
   };
   handleChange = e => {
@@ -61,4 +66,4 @@ class SingIn extends Component {
   }
 }
 
-export default SingIn;
+export default withRouter(SingIn);

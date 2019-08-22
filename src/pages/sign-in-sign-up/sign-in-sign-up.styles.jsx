@@ -21,4 +21,6 @@ export const FormContainer = styled.div`
     url(${contactBcg});
   background-position: center;
   background-size: cover;
+  display: flex;
+  justify-content: space-between;
 `;

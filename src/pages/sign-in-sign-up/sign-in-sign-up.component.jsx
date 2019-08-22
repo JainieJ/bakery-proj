@@ -1,5 +1,6 @@
 import React from "react";
 import SingIn from "../../components/sign-in/sign-in.component";
+import SignUp from "../../components/sign-up/sign-up.component";
 import {
   SignInAndSignUpContainer,
   FormContainer
@@ -10,6 +11,7 @@ const SignInAndSignUpPage = () => {
     <SignInAndSignUpContainer>
       <FormContainer>
         <SingIn />
+        <SignUp />
       </FormContainer>
     </SignInAndSignUpContainer>
   );
