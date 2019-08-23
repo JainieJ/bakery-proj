@@ -19,7 +19,7 @@ const SingleProductContent = ({ history, singleProduct, addItem }) => {
         <div className="col-10 mx-auto col-lg-6 my-3 text-center mr-5 align-self-center">
           <ImageContainer
             className="img-fluid"
-            src={singleProduct.image}
+            src={`../${singleProduct.image}`}
             alt="store product"
           />
         </div>

@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+// import { storeProducts } from "./../context/productData";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBFEZ6Jj4gFxF_Qj6m9SBY6570iW_JGQms",
@@ -36,7 +37,27 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+//code for retrieving data from firestore
+
+export const retrieveProducts = collections => {
+  //collections parameter already represents a snapshot
+  const transformedCollections = collections.docs.map(doc => {
+    //to get data stored in the doc we need to call doc.data()
+    return {
+      id: doc.id,
+      ...doc.data()
+    };
+  });
+  return transformedCollections;
+};
+
+// code for creating new user
 export const createUserProfileDocument = async (userAuth, additionalData) => {
+  //the uncommented code populated products collection in firestore with products without id
+  // addCollectionAndDocuments(
+  //   "products",
+  //   storeProducts.map(({ id, ...rest }) => ({ ...rest }))
+  // );
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();

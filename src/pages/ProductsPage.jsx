@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { client } from "./../context/contentful";
 import { Route } from "react-router-dom";
 import { updateProducts } from "./../redux/filter/filter.actions";
 import { setProducts } from "./../redux/products/products.actions";
+import { firestore, retrieveProducts } from "../firebase/firebase.utils";
 import productsBcg from "../img/productsBcg.jpg";
 import Hero from "./../components/Hero";
 import ProductContent from "../components/ProductsPage/product-content/product-content.component";
@@ -19,21 +19,15 @@ class ProductsPage extends Component {
   };
   componentDidMount() {
     const { updateProducts, setProducts } = this.props;
-    client
-      .getEntries({
-        content_type: "bakery"
-      })
-      .then(response => {
-        const formatedData = response.items.map(product => ({
-          id: product.sys.id,
-          ...product.fields,
-          image: product.fields.image.fields.file.url
-        }));
-        setProducts(formatedData);
-        updateProducts(formatedData);
-        this.setState({ loading: false });
-      })
-      .catch(console.error);
+    const collectionRef = firestore.collection("products");
+    //onSnapShot runs on every update in the "collections" collection or when the component mounts for
+    //the first time. snapshot represents the array of documents at this "collections" location
+    collectionRef.onSnapshot(async snapshot => {
+      const products = retrieveProducts(snapshot);
+      updateProducts(products);
+      setProducts(products);
+      this.setState({ loading: false });
+    });
   }
   render() {
     const { loading } = this.state;
