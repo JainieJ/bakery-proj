@@ -1,5 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+
+const linkStyles = css`
+  display: block;
+  color: var(--mainBlack);
+  font-size: 2rem;
+  text-transform: capitalize;
+  padding: 1rem;
+  transition: var(--mainTransition);
+  &:hover {
+    background: var(--mainPink);
+    padding-left: 2rem;
+    text-decoration: none;
+    color: var(--mainBlack);
+  }
+`;
 
 export const SideMenuContainer = styled.div`
   position: fixed;
@@ -21,16 +36,16 @@ export const SideMenuContainer = styled.div`
 `;
 
 export const LinkContainer = styled(Link)`
-  display: block;
-  color: var(--mainBlack);
-  font-size: 2rem;
-  text-transform: capitalize;
-  padding: 1rem;
-  transition: var(--mainTransition);
-  &:hover {
-    background: var(--mainPink);
-    padding-left: 2rem;
-    text-decoration: none;
-    color: var(--mainBlack);
+  ${linkStyles}
+`;
+
+export const SignOutButtonContainer = styled.button`
+  ${linkStyles}
+  background-color:transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  &:focus {
+    outline: none;
   }
 `;
