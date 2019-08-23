@@ -1,6 +1,6 @@
 import userActionTypes from "./user.types";
 
-const INITIAL_STATE = { loggedInUser: {} };
+const INITIAL_STATE = { loggedInUser: null };
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

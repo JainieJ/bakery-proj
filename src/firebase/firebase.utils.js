@@ -25,16 +25,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
-      var newUser = {
+      await userRef.set({
         displayName,
         email,
         createdAt,
         ...additionalData
-      };
-      await userRef.set(newUser);
+      });
     } catch (err) {
       console.error(err);
     }
   }
-  return newUser;
+  return userRef;
 };

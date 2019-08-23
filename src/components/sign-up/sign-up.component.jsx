@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { setUser } from "../../redux/user/user.actions";
 import FormInput from "./../form-input/form-input.component";
 import {
   auth,
@@ -23,7 +21,7 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
-    const { history, setUser } = this.props;
+    const { history } = this.props;
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -33,7 +31,7 @@ class SignUp extends Component {
         email,
         password
       );
-      const loggedInUser = await createUserProfileDocument(user, {
+      await createUserProfileDocument(user, {
         displayName
       });
       this.setState(
@@ -44,7 +42,6 @@ class SignUp extends Component {
           confirmPassword: ""
         },
         () => {
-          setUser(loggedInUser);
           history.push("/");
         }
       );
@@ -119,13 +116,4 @@ class SignUp extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setUser: user => dispatch(setUser(user))
-});
-
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SignUp)
-);
+export default withRouter(SignUp);

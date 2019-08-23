@@ -6,9 +6,7 @@ import {
   AccountContainer
 } from "./sign-in.styles";
 import FormInput from "./../form-input/form-input.component";
-import { auth, firestore } from "./../../firebase/firebase.utils";
-import { connect } from "react-redux";
-import { setUser } from "./../../redux/user/user.actions";
+import { auth } from "./../../firebase/firebase.utils";
 
 class SingIn extends Component {
   state = {
@@ -18,13 +16,9 @@ class SingIn extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
-    const { setUser } = this.props;
     try {
-      const {
-        user: { uid }
-      } = await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" }, async () => {
-        setUser(await this.getLoggedInUser(uid));
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" }, () => {
         this.props.history.push("/");
       });
     } catch (e) {
@@ -45,15 +39,6 @@ class SingIn extends Component {
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  };
-  getLoggedInUser = async id => {
-    try {
-      const userRef = firestore.doc(`users/${id}`);
-      const snapShot = await userRef.get();
-      return snapShot.data();
-    } catch (e) {
-      console.log(e);
-    }
   };
   render() {
     const { email, password } = this.state;
@@ -91,13 +76,4 @@ class SingIn extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setUser: user => dispatch(setUser(user))
-});
-
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SingIn)
-);
+export default withRouter(SingIn);

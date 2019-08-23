@@ -16,8 +16,14 @@ import {
   LogoContainer
 } from "./navbar.styles";
 import Greeting from "../greeting/greeting.component";
+import { selectLoggedInUser } from "./../../redux/user/user.selectors";
 
-const NavBar = ({ toggleSideCart, toggleSideBar, cartItemsTotal }) => {
+const NavBar = ({
+  toggleSideCart,
+  toggleSideBar,
+  cartItemsTotal,
+  loggedInUser
+}) => {
   return (
     <NavContainer>
       <NavContentContainer>
@@ -30,7 +36,7 @@ const NavBar = ({ toggleSideCart, toggleSideBar, cartItemsTotal }) => {
           />
         </LogoContainer>
         <GreetingAndShopIconContainer>
-          <Greeting />
+          {loggedInUser && <Greeting />}
           <NavCartContainer>
             <ShopIconContainer onClick={toggleSideCart} />
             <ItemsCountContainer>{cartItemsTotal}</ItemsCountContainer>
@@ -42,7 +48,8 @@ const NavBar = ({ toggleSideCart, toggleSideBar, cartItemsTotal }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  cartItemsTotal: selectCartItemsTotalCount
+  cartItemsTotal: selectCartItemsTotalCount,
+  loggedInUser: selectLoggedInUser
 });
 
 const mapDispatchToProps = dispatch => ({
