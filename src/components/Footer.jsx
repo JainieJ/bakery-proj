@@ -1,52 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-import { ProductConsumer } from "../context";
+import { socialLinks } from "./../context/socialLinks";
+import { contactInfo } from "./../context/contactInfo";
 
 const Footer = () => {
   return (
-    <ProductConsumer>
-      {value => {
-        const { socialLinks, contactInfo } = value;
-        return (
-          <FooterWrapper className="div container-fluid">
-            <div className="row">
-              <div className="col-md-6 text-center social-links">
-                <h3 className="social-title">sweet house</h3>
-                <div className="icon-container d-flex justify-content-between">
-                  {socialLinks.map((link, index) => {
-                    return (
-                      <a
-                        href="https://www.facebook.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={index}
-                        className="social-icon"
-                      >
-                        {link}
-                      </a>
-                    );
-                  })}
-                </div>
+    <FooterWrapper className="div container-fluid">
+      <div className="row">
+        <div className="col-md-6 text-center social-links">
+          <h3 className="social-title">sweet house</h3>
+          <div className="icon-container d-flex justify-content-between">
+            {socialLinks.map((link, index) => {
+              return (
+                <a
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={index}
+                  className="social-icon"
+                >
+                  {link}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+        <div className="col-md-6 text-center contact-info">
+          <h3 className="contact-title">contact</h3>
+          {contactInfo.map(item => {
+            return (
+              <div
+                className="d-flex align-items-center contact-container"
+                key={item.id}
+              >
+                <span className="contact-icon">{item.icon}</span>
+                <p className="mb-0 ml-3">{item.text}</p>
               </div>
-              <div className="col-md-6 text-center contact-info">
-                <h3 className="contact-title">contact</h3>
-                {contactInfo.map(item => {
-                  return (
-                    <div
-                      className="d-flex align-items-center contact-container"
-                      key={item.id}
-                    >
-                      <span className="contact-icon">{item.icon}</span>
-                      <p className="mb-0 ml-3">{item.text}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </FooterWrapper>
-        );
-      }}
-    </ProductConsumer>
+            );
+          })}
+        </div>
+      </div>
+    </FooterWrapper>
   );
 };
 

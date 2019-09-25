@@ -7,9 +7,10 @@ import {
 } from "./side-cart-item.styles";
 
 const SideCartItem = ({ image, title, quantity }) => {
+  console.log(image);
   return (
     <SideCartItemContainer>
-      <ImageContainer src={image} alt="product in cart" />
+      <ImageContainer src={`../${image}`} alt="product in cart" />
       <TitleContainer>{title}</TitleContainer>
       <AmountContainer>amount: {quantity}</AmountContainer>
     </SideCartItemContainer>

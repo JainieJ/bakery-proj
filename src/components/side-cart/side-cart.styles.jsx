@@ -22,6 +22,7 @@ export const CartTotalContainer = styled.p`
   text-transform: capitalize;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 `;
 
